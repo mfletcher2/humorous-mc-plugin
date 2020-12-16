@@ -1,0 +1,27 @@
+# Sneak Fart Configuration
+
+# Whether or not to enable this plugin (true or false)
+EnableFarts: true
+
+# Distance from the player in blocks that the fart should come out
+FartDistance: 0.8
+
+# Time in seconds that the fart should come out after a player starts sneaking
+# A random value is selected between FartTimeStart and FartTimeEnd
+FartTimeStart: 15
+FartTimeEnd: 30
+
+# How spread apart the fart particles should be in blocks
+FartOffset: 0.25
+
+# How many fart particles to spawn
+FartParticleCount: 25
+
+# Size of fart particles
+FartParticleSize: 1
+
+# Volume level of fart sound
+FartVolume: 1
+
+# Percent chance that poop will spawn with fart from 0 to 1
+PoopChance: 0.05
