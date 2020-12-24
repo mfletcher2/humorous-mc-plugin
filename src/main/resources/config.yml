@@ -3,6 +3,14 @@
 # Whether or not to enable this plugin (true or false)
 EnableFarts: true
 
+# Percent chance that poop will spawn with fart from 0 to 1
+# Set to 0 to disable
+PoopChance: 0.05
+
+# Percent chance that the fart will inflict nausea from 0 to 1
+# Set to 0 to disable
+NauseaChance: 0.3
+
 # Distance from the player in blocks that the fart should come out
 FartDistance: 0.8
 
@@ -10,6 +18,9 @@ FartDistance: 0.8
 # A random value is selected between FartTimeStart and FartTimeEnd
 FartTimeStart: 15
 FartTimeEnd: 30
+
+# How far players must be from the fart to be inflicted with nausea in blocks
+NauseaDistance: 2
 
 # How spread apart the fart particles should be in blocks
 FartOffset: 0.25
@@ -22,6 +33,3 @@ FartParticleSize: 1
 
 # Volume level of fart sound
 FartVolume: 1
-
-# Percent chance that poop will spawn with fart from 0 to 1
-PoopChance: 0.05
