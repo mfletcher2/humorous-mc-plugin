@@ -1,7 +1,6 @@
 package nezd53.sneakfart;
 
 import org.bukkit.*;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -33,8 +32,7 @@ public class FartHandler {
         player.playSound(l, Sound.BLOCK_WET_GRASS_PLACE, (float)fartVolume, 0.005f);
 
         if (random() <= poopChance) {
-                Item item = (Item) player.getWorld().spawnEntity(l, EntityType.DROPPED_ITEM);
-                item.setItemStack(new ItemStack(Material.BROWN_DYE));
+                Item item = player.getWorld().dropItem(l, new ItemStack(Material.BROWN_DYE));
                 item.setPickupDelay(32767);
                 item.setTicksLived(5900);
                 item.setCustomName(player.getName() + "'s Poop");
