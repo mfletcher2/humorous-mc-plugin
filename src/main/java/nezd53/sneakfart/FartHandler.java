@@ -31,7 +31,7 @@ public class FartHandler {
         float yaw = player.getLocation().getYaw();
         Vector offset = new Vector(sin(toRadians(yaw)) * fartDistance, 0.25, -cos(toRadians(yaw)) * fartDistance);
         Location l = player.getLocation().add(offset);
-        player.spawnParticle(Particle.REDSTONE, l,
+        player.getWorld().spawnParticle(Particle.REDSTONE, l,
                 25, fartOffset, fartOffset, fartOffset, options);
         player.playSound(l, Sound.BLOCK_WET_GRASS_PLACE, (float) fartVolume, 0.005f);
 
