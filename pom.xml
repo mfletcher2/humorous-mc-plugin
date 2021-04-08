@@ -6,14 +6,14 @@
 
     <groupId>nezd53</groupId>
     <artifactId>sneakfart</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
     <packaging>jar</packaging>
 
     <name>Sneak Fart</name>
 
     <description>Sneak and Fart!</description>
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>11.0</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
