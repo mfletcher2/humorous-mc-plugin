@@ -4,7 +4,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class SneakFart extends JavaPlugin {
 
-    static boolean enableFarts;
+    static boolean sneakFarts, fartCommand;
     static double fartDistance, fartTimeStart, fartTimeEnd,
             fartOffset, fartParticleSize, fartVolume, poopChance, nauseaChance, nauseaDistance;
     static int fartParticleCount;
@@ -12,7 +12,8 @@ public final class SneakFart extends JavaPlugin {
     @Override
     public void onEnable() {
         saveDefaultConfig();
-        enableFarts = getConfig().getBoolean("EnableFarts", true);
+        sneakFarts = getConfig().getBoolean("EnableFarts", true);
+        fartCommand = getConfig().getBoolean("FartCommand", true);
         fartDistance = getConfig().getDouble("FartDistance", 0.8);
         fartTimeStart = getConfig().getDouble("FartTimeStart", 15);
         fartTimeEnd = getConfig().getDouble("FartTimeEnd", 30);
@@ -24,9 +25,11 @@ public final class SneakFart extends JavaPlugin {
         nauseaChance = getConfig().getDouble("NauseaChance", 0.3);
         nauseaDistance = getConfig().getDouble("NauseaDistance", 2);
 
-        if (enableFarts)
+        if (sneakFarts)
             getServer().getPluginManager().registerEvents(new FartListener(), this);
 
+        if (fartCommand)
+            this.getCommand("fart").setExecutor(new FartCommandExecutor());
     }
 
     @Override
