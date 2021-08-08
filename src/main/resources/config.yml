@@ -1,7 +1,10 @@
 # Sneak Fart Configuration
 
-# Whether or not to enable this plugin (true or false)
+# Enable random farts while sneaking (true or false)
 EnableFarts: true
+
+# Fart on demand with /fart (true or false)
+FartCommand: true
 
 # Percent chance that poop will spawn with fart from 0 to 1
 # Set to 0 to disable
