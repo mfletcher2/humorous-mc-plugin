@@ -8,6 +8,7 @@ public final class SneakFart extends JavaPlugin {
     static double fartDistance, fartTimeStart, fartTimeEnd,
             fartOffset, fartParticleSize, fartVolume, poopChance, nauseaChance, nauseaDistance;
     static int fartParticleCount;
+    static String poopName;
 
     @Override
     public void onEnable() {
@@ -22,6 +23,7 @@ public final class SneakFart extends JavaPlugin {
         fartParticleSize = getConfig().getDouble("FartParticleSize", 1);
         fartVolume = getConfig().getDouble("FartVolume", 1);
         poopChance = getConfig().getDouble("PoopChance", 0.05);
+        poopName = getConfig().getString("PoopName", "Poop");
         nauseaChance = getConfig().getDouble("NauseaChance", 0.2);
         nauseaDistance = getConfig().getDouble("NauseaDistance", 5);
 

@@ -14,6 +14,10 @@ PoopChance: 0.05
 # Set to 0 to disable
 NauseaChance: 0.2
 
+# Name of the poop
+# Will appear as "Player's Poop"
+PoopName: "Poop"
+
 # Distance from the player in blocks that the fart should come out
 FartDistance: 0.8
 

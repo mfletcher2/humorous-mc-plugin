@@ -46,7 +46,7 @@ public class FartHandler {
         Item item = player.getWorld().dropItem(l, new ItemStack(Material.BROWN_DYE));
         item.setPickupDelay(32767);
         item.setTicksLived(5900);
-        item.setCustomName(player.getName() + "'s Poop");
+        item.setCustomName(player.getName() + "'s " + poopName);
         item.setCustomNameVisible(true);
         item.setVelocity(offset.clone().divide(new Vector(10, 1, 10)));
     }
