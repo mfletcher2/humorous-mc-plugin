@@ -15,15 +15,15 @@ public final class SneakFart extends JavaPlugin {
         sneakFarts = getConfig().getBoolean("EnableFarts", true);
         fartCommand = getConfig().getBoolean("FartCommand", true);
         fartDistance = getConfig().getDouble("FartDistance", 0.8);
-        fartTimeStart = getConfig().getDouble("FartTimeStart", 15);
+        fartTimeStart = getConfig().getDouble("FartTimeStart", 2);
         fartTimeEnd = getConfig().getDouble("FartTimeEnd", 30);
         fartOffset = getConfig().getDouble("FartOffset", 0.25);
         fartParticleCount = getConfig().getInt("FartParticleCount", 25);
         fartParticleSize = getConfig().getDouble("FartParticleSize", 1);
         fartVolume = getConfig().getDouble("FartVolume", 1);
         poopChance = getConfig().getDouble("PoopChance", 0.05);
-        nauseaChance = getConfig().getDouble("NauseaChance", 0.3);
-        nauseaDistance = getConfig().getDouble("NauseaDistance", 2);
+        nauseaChance = getConfig().getDouble("NauseaChance", 0.2);
+        nauseaDistance = getConfig().getDouble("NauseaDistance", 5);
 
         if (sneakFarts)
             getServer().getPluginManager().registerEvents(new FartListener(), this);
