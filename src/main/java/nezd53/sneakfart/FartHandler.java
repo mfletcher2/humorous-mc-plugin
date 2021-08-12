@@ -38,8 +38,11 @@ public class FartHandler {
         if (random() < poopChance)
             poop(player, offset, l);
 
+        if (random() < deadlyPoopChance)
+            deadlyPoop(player, l);
+
         if (random() < nauseaChance)
-            inflictNausea(l);
+            inflictNausea(l, player);
     }
 
     private static void poop(Player player, Vector offset, Location l) {
@@ -51,10 +54,21 @@ public class FartHandler {
         item.setVelocity(offset.clone().divide(new Vector(10, 1, 10)));
     }
 
-    private static void inflictNausea(Location l) {
+    private static void deadlyPoop(Player player, Location l) {
+        String command = "summon zombie " + l.getX() + " " + l.getY() + " " + l.getZ() +
+                " {ArmorItems:[{},{},{},{id:player_head,Count:1,tag:{SkullOwner:{Id:[I;1918731868,-266323871,-1302493604,-266336159],Properties:{textures:[{Value:\"e3RleHR1cmVzOntTS0lOOnt1cmw6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWFhMDU5OTBkNjMzYzhmYjFhYWVmYTM1YzcwYzViMWU0YWFiODE2YWI1MmI4YzAyZDU0MzY4ODdhNjI3YTI0MCJ9fX0=\"}]}}}}], " +
+                "ActiveEffects:[{Duration:99999999, ShowParticles:0, Id:14}], IsBaby:1, Health:1, DeathLootTable:\"\"}";
+        try {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void inflictNausea(Location l, Player player) {
         List<Player> players = l.getWorld().getPlayers();
         for (Player p : players)
-            if (p.getLocation().distance(l) <= nauseaDistance)
+            if (p.getLocation().distance(l) <= nauseaDistance && !player.equals(p))
                 p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 5 * 20, 5));
     }
 }
