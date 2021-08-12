@@ -6,7 +6,7 @@ public final class SneakFart extends JavaPlugin {
 
     static boolean sneakFarts, fartCommand;
     static double fartDistance, fartTimeStart, fartTimeEnd,
-            fartOffset, fartParticleSize, fartVolume, poopChance, nauseaChance, nauseaDistance;
+            fartOffset, fartParticleSize, fartVolume, poopChance, deadlyPoopChance, nauseaChance, nauseaDistance;
     static int fartParticleCount;
     static String poopName;
 
@@ -16,16 +16,17 @@ public final class SneakFart extends JavaPlugin {
         sneakFarts = getConfig().getBoolean("EnableFarts", true);
         fartCommand = getConfig().getBoolean("FartCommand", true);
         fartDistance = getConfig().getDouble("FartDistance", 0.8);
-        fartTimeStart = getConfig().getDouble("FartTimeStart", 2);
-        fartTimeEnd = getConfig().getDouble("FartTimeEnd", 30);
+        fartTimeStart = getConfig().getDouble("FartTimeStart", 10);
+        fartTimeEnd = getConfig().getDouble("FartTimeEnd", 60);
         fartOffset = getConfig().getDouble("FartOffset", 0.25);
         fartParticleCount = getConfig().getInt("FartParticleCount", 25);
         fartParticleSize = getConfig().getDouble("FartParticleSize", 1);
         fartVolume = getConfig().getDouble("FartVolume", 1);
-        poopChance = getConfig().getDouble("PoopChance", 0.05);
+        poopChance = getConfig().getDouble("PoopChance", 0.1);
+        deadlyPoopChance = getConfig().getDouble("DeadlyPoopChance", 0.05);
         poopName = getConfig().getString("PoopName", "Poop");
-        nauseaChance = getConfig().getDouble("NauseaChance", 0.2);
-        nauseaDistance = getConfig().getDouble("NauseaDistance", 5);
+        nauseaChance = getConfig().getDouble("NauseaChance", 1);
+        nauseaDistance = getConfig().getDouble("NauseaDistance", 3);
 
         if (sneakFarts)
             getServer().getPluginManager().registerEvents(new FartListener(), this);

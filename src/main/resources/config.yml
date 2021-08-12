@@ -8,11 +8,15 @@ FartCommand: true
 
 # Percent chance that poop will spawn with fart from 0 to 1
 # Set to 0 to disable
-PoopChance: 0.05
+PoopChance: 0.1
+
+# Percent chance that deadly poop will spawn when farting from 0 to 1
+# Set to 0 to disable
+DeadlyPoopChance: 0.05
 
 # Percent chance that the fart will inflict nausea from 0 to 1
 # Set to 0 to disable
-NauseaChance: 0.2
+NauseaChance: 1
 
 # Name of the poop
 # Will appear as "Player's Poop"
@@ -23,11 +27,11 @@ FartDistance: 0.8
 
 # Time in seconds that the fart should come out after a player starts sneaking
 # A random value is selected between FartTimeStart and FartTimeEnd
-FartTimeStart: 2
-FartTimeEnd: 30
+FartTimeStart: 10
+FartTimeEnd: 60
 
 # How far players must be from the fart to be inflicted with nausea in blocks
-NauseaDistance: 5
+NauseaDistance: 3
 
 # How spread apart the fart particles should be in blocks
 FartOffset: 0.25
