@@ -1,5 +1,6 @@
 package nezd53.sneakfart;
 
+import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class SneakFart extends JavaPlugin {
@@ -12,6 +13,10 @@ public final class SneakFart extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        // Bstats integration
+        int pluginId = 12663; // <-- Replace with the id of your plugin!
+        Metrics metrics = new Metrics(this, pluginId);
+
         saveDefaultConfig();
         sneakFarts = getConfig().getBoolean("EnableFarts", true);
         fartCommand = getConfig().getBoolean("FartCommand", true);
