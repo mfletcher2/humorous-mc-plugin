@@ -1,7 +1,7 @@
 name: SneakFart
-version: 1.5
+version: 1.6
 main: nezd53.sneakfart.SneakFart
-api-version: 1.16
+api-version: 1.17
 prefix: sneakfart
 authors: [ nezd53 ]
 description: Random farts while sneaking!
