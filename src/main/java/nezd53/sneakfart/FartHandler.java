@@ -43,6 +43,8 @@ public class FartHandler {
 
         if (random() < nauseaChance)
             inflictNausea(l, player);
+
+        SneakFart.fartCount++;
     }
 
     private static void poop(Player player, Vector offset, Location l) {

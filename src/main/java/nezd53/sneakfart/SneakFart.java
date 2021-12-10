@@ -1,7 +1,10 @@
 package nezd53.sneakfart;
 
 import org.bstats.bukkit.Metrics;
+import org.bstats.charts.SingleLineChart;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.concurrent.Callable;
 
 public final class SneakFart extends JavaPlugin {
 
@@ -10,13 +13,10 @@ public final class SneakFart extends JavaPlugin {
             fartOffset, fartParticleSize, fartVolume, poopChance, deadlyPoopChance, nauseaChance, nauseaDistance;
     static int fartParticleCount;
     static String poopName;
+    static int fartCount;
 
     @Override
     public void onEnable() {
-        // Bstats integration
-        int pluginId = 12663; // <-- Replace with the id of your plugin!
-        Metrics metrics = new Metrics(this, pluginId);
-
         saveDefaultConfig();
         sneakFarts = getConfig().getBoolean("EnableFarts", true);
         fartCommand = getConfig().getBoolean("FartCommand", true);
@@ -38,6 +38,18 @@ public final class SneakFart extends JavaPlugin {
 
         if (fartCommand)
             this.getCommand("fart").setExecutor(new FartCommandExecutor());
+
+        fartCount = 0;
+
+        // bStats integration
+        int pluginId = 12663; // <-- Replace with the id of your plugin!
+        Metrics metrics = new Metrics(this, pluginId);
+        metrics.addCustomChart(new SingleLineChart("fart_count", new Callable<Integer>() {
+            @Override
+            public Integer call() throws Exception {
+                return fartCount;
+            }
+        }));
     }
 
     @Override
