@@ -6,7 +6,7 @@
 
     <groupId>nezd53</groupId>
     <artifactId>sneakfart</artifactId>
-    <version>1.6</version>
+    <version>1.7</version>
     <packaging>jar</packaging>
 
     <name>Sneak Fart</name>
