@@ -6,7 +6,7 @@
 
     <groupId>nezd53</groupId>
     <artifactId>sneakfart</artifactId>
-    <version>1.6</version>
+    <version>1.7</version>
     <packaging>jar</packaging>
 
     <name>Sneak Fart</name>
@@ -46,6 +46,10 @@
                             <pattern>org.bstats</pattern>
                             <shadedPattern>nezd53.sneakfart</shadedPattern>
                         </relocation>
+                        <relocation>
+                            <pattern>de.tr7zw.changeme.nbtapi</pattern>
+                            <shadedPattern>nezd53.sneakfart</shadedPattern>
+                        </relocation>
                     </relocations>
                 </configuration>
                 <executions>
@@ -71,6 +75,11 @@
             <id>spigotmc-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
+        <repository>
+            <id>codemc-repo</id>
+            <url>https://repo.codemc.org/repository/maven-public/</url>
+            <layout>default</layout>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -85,6 +94,11 @@
             <artifactId>bstats-bukkit</artifactId>
             <version>2.2.1</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>de.tr7zw</groupId>
+            <artifactId>item-nbt-api</artifactId>
+            <version>2.9.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
