@@ -1,9 +1,15 @@
 package nezd53.sneakfart;
 
+import de.tr7zw.changeme.nbtapi.NBTCompound;
+import de.tr7zw.changeme.nbtapi.NBTItem;
+import de.tr7zw.changeme.nbtapi.NBTListCompound;
 import org.bukkit.*;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.loot.LootTables;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -57,14 +63,29 @@ public class FartHandler {
     }
 
     private static void deadlyPoop(Player player, Location l) {
-        String command = "summon zombie " + l.getX() + " " + l.getY() + " " + l.getZ() +
-                " {ArmorItems:[{},{},{},{id:player_head,Count:1,tag:{SkullOwner:{Id:[I;1918731868,-266323871,-1302493604,-266336159],Properties:{textures:[{Value:\"e3RleHR1cmVzOntTS0lOOnt1cmw6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWFhMDU5OTBkNjMzYzhmYjFhYWVmYTM1YzcwYzViMWU0YWFiODE2YWI1MmI4YzAyZDU0MzY4ODdhNjI3YTI0MCJ9fX0=\"}]}}}}], " +
-                "ActiveEffects:[{Duration:99999999, ShowParticles:0, Id:14}], IsBaby:1, Health:1, DeathLootTable:\"\", CustomName:\"\\\"The Deadly Poop\\\"\"}";
-        try {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String textureStr = "e3RleHR1cmVzOntTS0lOOnt1cmw6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWFhMDU5OTBkNjMzYzhmYjFhYWVmYTM1YzcwYzViMWU0YWFiODE2YWI1MmI4YzAyZDU0MzY4ODdhNjI3YTI0MCJ9fX0=";
+        ItemStack head = new ItemStack(Material.PLAYER_HEAD, 1);
+        NBTItem headNbt = new NBTItem(head);
+
+        NBTCompound display = headNbt.addCompound("display");
+        display.setString("Name", "Deadly Poop's Head");
+
+        NBTCompound skullOwner = headNbt.addCompound("SkullOwner");
+        skullOwner.setIntArray("Id", new int[]{1918731868, -266323871, -1302493604, -266336159});
+        NBTListCompound textures = skullOwner.addCompound("Properties").getCompoundList("textures").addCompound();
+        textures.setString("Value", textureStr);
+
+        head = headNbt.getItem();
+
+        Zombie zombie = (Zombie) l.getWorld().spawnEntity(l, EntityType.ZOMBIE);
+        zombie.setBaby();
+        zombie.getEquipment().setHelmet(head);
+        zombie.setInvisible(true);
+        zombie.setSilent(true);
+        zombie.setHealth(1);
+        zombie.setLootTable(LootTables.EMPTY.getLootTable());
+        zombie.setInvisible(true);
+        zombie.setCustomName("Deadly Poop");
     }
 
     private static void inflictNausea(Location l, Player player) {
