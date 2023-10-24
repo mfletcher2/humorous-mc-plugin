@@ -1,7 +1,7 @@
-# SneakFart
-sneaking and farting lol
+![SpigotMC Downloads](https://img.shields.io/spiget/downloads/86771?label=SpigotMC%20Downloads)
+![Modrinth Downloads](https://img.shields.io/modrinth/dt/CsFp0oQj?label=Modrinth%20Downloads)
 
-https://www.spigotmc.org/resources/sneak-fart.86771/
+[SpigotMC link](https://www.spigotmc.org/resources/sneak-fart.86771/)
 
 it uses [Maven](https://maven.apache.org/) compile with `mvn package`
 
