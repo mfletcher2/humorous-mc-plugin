@@ -44,11 +44,11 @@
                     <relocations>
                         <relocation>
                             <pattern>org.bstats</pattern>
-                            <shadedPattern>nezd53.sneakfart</shadedPattern>
+                            <shadedPattern>${project.groupId}.${project.artifactId}</shadedPattern>
                         </relocation>
                         <relocation>
                             <pattern>de.tr7zw.changeme.nbtapi</pattern>
-                            <shadedPattern>nezd53.sneakfart</shadedPattern>
+                            <shadedPattern>${project.groupId}.${project.artifactId}</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
