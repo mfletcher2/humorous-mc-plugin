@@ -72,7 +72,7 @@ public class FartHandler {
                     Zombie zombie = (Zombie) world.spawnEntity(l, EntityType.ZOMBIE);
                     zombie.setBaby();
                     Optional.ofNullable(zombie.getEquipment())
-                            .ifPresent(equipment -> equipment.setHelmet(headNbt.getItem()));
+                            .ifPresent(equipment -> equipment.setHelmet(head));
                     zombie.setInvisible(true);
                     zombie.setSilent(true);
                     zombie.setHealth(1);
