@@ -1,8 +1,7 @@
 package nezd53.sneakfart;
 
-import de.tr7zw.changeme.nbtapi.NBTCompound;
-import de.tr7zw.changeme.nbtapi.NBTItem;
-import de.tr7zw.changeme.nbtapi.NBTListCompound;
+import de.tr7zw.changeme.nbtapi.NBT;
+import de.tr7zw.changeme.nbtapi.iface.ReadWriteNBT;
 import org.bukkit.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
@@ -17,6 +16,7 @@ import org.bukkit.util.Vector;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.UUID;
 
 import static java.lang.Math.*;
 import static nezd53.sneakfart.SneakFart.*;
@@ -55,16 +55,18 @@ public class FartHandler {
     private static void deadlyPoop(Location l) {
         String textureStr = "e3RleHR1cmVzOntTS0lOOnt1cmw6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWFhMDU5OTBkNjMzYzhmYjFhYWVmYTM1YzcwYzViMWU0YWFiODE2YWI1MmI4YzAyZDU0MzY4ODdhNjI3YTI0MCJ9fX0=";
         ItemStack head = new ItemStack(Material.PLAYER_HEAD, 1);
-        NBTItem headNbt = new NBTItem(head);
 
-        NBTCompound display = headNbt.addCompound("display");
-        display.setString("Name", "Deadly Poop's Head");
+        NBT.modify(head, nbt -> {
+            final ReadWriteNBT skullOwnerCompound = nbt.getOrCreateCompound("SkullOwner");
 
-        NBTCompound skullOwner = headNbt.addCompound("SkullOwner");
-        skullOwner.setIntArray("Id", new int[]{1918731868, -266323871, -1302493604, -266336159});
-        NBTListCompound textures = skullOwner.addCompound("Properties").getCompoundList("textures").addCompound();
-        textures.setString("Value", textureStr);
-
+            skullOwnerCompound.setUUID("Id", UUID.randomUUID());
+          
+            skullOwnerCompound.getOrCreateCompound("Properties")
+                    .getCompoundList("textures")
+                    .addCompound()
+                    .setString("Value", textureStr);
+    });
+      
         Optional.ofNullable(l.getWorld())
                 .ifPresent(world -> {
                     Zombie zombie = (Zombie) world.spawnEntity(l, EntityType.ZOMBIE);

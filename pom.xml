@@ -6,7 +6,8 @@
 
     <groupId>nezd53</groupId>
     <artifactId>sneakfart</artifactId>
-    <version>1.8</version>
+    <version>1.9</version>
+    <packaging>jar</packaging>
 
     <name>Sneak Fart</name>
 
@@ -88,7 +89,7 @@
         <dependency>
             <groupId>de.tr7zw</groupId>
             <artifactId>item-nbt-api</artifactId>
-            <version>2.12.2</version>
+            <version>2.12.4</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>
