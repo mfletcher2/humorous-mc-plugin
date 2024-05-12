@@ -9,29 +9,19 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.loot.LootTables;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.UUID;
 
 import static java.lang.Math.*;
 import static nezd53.sneakfart.SneakFart.*;
 
 public class FartHandler {
-    static void handleSneak(Player player) {
-        int startingTick = player.getStatistic(Statistic.SNEAK_TIME);
-        int endTick = startingTick + (int) (random() * (fartTimeEnd - fartTimeStart) + fartTimeStart) * 20;
-
-        player.getServer().getScheduler().scheduleSyncDelayedTask(JavaPlugin.getProvidingPlugin(SneakFart.class), () -> {
-            if (player.getStatistic(Statistic.SNEAK_TIME) >= endTick)
-                fart(player);
-        }, endTick - startingTick + 5);
-
-    }
-
     static void fart(Player player) {
         Particle.DustOptions options = new Particle.DustOptions(Color.fromRGB(139, 69, 19), (float) fartParticleSize);
         float yaw = player.getLocation().getYaw();
@@ -70,28 +60,35 @@ public class FartHandler {
             final ReadWriteNBT skullOwnerCompound = nbt.getOrCreateCompound("SkullOwner");
 
             skullOwnerCompound.setUUID("Id", UUID.randomUUID());
-
+          
             skullOwnerCompound.getOrCreateCompound("Properties")
                     .getCompoundList("textures")
                     .addCompound()
                     .setString("Value", textureStr);
-        });
-
-        Zombie zombie = (Zombie) l.getWorld().spawnEntity(l, EntityType.ZOMBIE);
-        zombie.setBaby();
-        zombie.getEquipment().setHelmet(head);
-        zombie.setInvisible(true);
-        zombie.setSilent(true);
-        zombie.setHealth(1);
-        zombie.setLootTable(LootTables.EMPTY.getLootTable());
-        zombie.setInvisible(true);
-        zombie.setCustomName("Deadly Poop");
+    });
+      
+        Optional.ofNullable(l.getWorld())
+                .ifPresent(world -> {
+                    Zombie zombie = (Zombie) world.spawnEntity(l, EntityType.ZOMBIE);
+                    zombie.setBaby();
+                    Optional.ofNullable(zombie.getEquipment())
+                            .ifPresent(equipment -> equipment.setHelmet(headNbt.getItem()));
+                    zombie.setInvisible(true);
+                    zombie.setSilent(true);
+                    zombie.setHealth(1);
+                    zombie.setLootTable(LootTables.EMPTY.getLootTable());
+                    zombie.setInvisible(true);
+                    zombie.setCustomName("Deadly Poop");
+                });
     }
 
     private static void inflictNausea(Location l, Player player) {
-        List<Player> players = l.getWorld().getPlayers();
-        for (Player p : players)
-            if (p.getLocation().distance(l) <= nauseaDistance && !player.equals(p))
-                p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 5 * 20, 5));
+        Optional.ofNullable(l.getWorld())
+                .stream()
+                .map(World::getPlayers)
+                .flatMap(List::stream)
+                .filter(p -> p.getLocation().distance(l) <= nauseaDistance)
+                .filter(Predicate.not(player::equals))
+                .forEach(p -> p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 5 * 20, 5)));
     }
 }
