@@ -1,22 +1,26 @@
 package nezd53.sneakfart;
 
-import de.tr7zw.changeme.nbtapi.NBT;
-import de.tr7zw.changeme.nbtapi.iface.ReadWriteNBT;
 import org.bukkit.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.loot.LootTables;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.profile.PlayerProfile;
+import org.bukkit.profile.PlayerTextures;
 import org.bukkit.util.Vector;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Predicate;
 import java.util.UUID;
+import java.util.function.Predicate;
 
 import static java.lang.Math.*;
 import static nezd53.sneakfart.SneakFart.*;
@@ -53,20 +57,28 @@ public class FartHandler {
     }
 
     private static void deadlyPoop(Location l) {
-        String textureStr = "e3RleHR1cmVzOntTS0lOOnt1cmw6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWFhMDU5OTBkNjMzYzhmYjFhYWVmYTM1YzcwYzViMWU0YWFiODE2YWI1MmI4YzAyZDU0MzY4ODdhNjI3YTI0MCJ9fX0=";
+        //String textureStr = "e3RleHR1cmVzOntTS0lOOnt1cmw6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWFhMDU5OTBkNjMzYzhmYjFhYWVmYTM1YzcwYzViMWU0YWFiODE2YWI1MmI4YzAyZDU0MzY4ODdhNjI3YTI0MCJ9fX0=";
+        String textureLink = "http://textures.minecraft.net/texture/aaa05990d633c8fb1aaefa35c70c5b1e4aab816ab52b8c02d5436887a627a240";
         ItemStack head = new ItemStack(Material.PLAYER_HEAD, 1);
 
-        NBT.modify(head, nbt -> {
-            final ReadWriteNBT skullOwnerCompound = nbt.getOrCreateCompound("SkullOwner");
+        // https://blog.jeff-media.com/creating-custom-heads-in-spigot-1-18-1/
+        PlayerProfile profile = Bukkit.createPlayerProfile(UUID.randomUUID());
+        PlayerTextures textures = profile.getTextures();
+        URL urlObject;
+        try {
+            urlObject = new URL(textureLink);
+        } catch (MalformedURLException exception) {
+            throw new RuntimeException("Invalid URL", exception);
+        }
+        textures.setSkin(urlObject);
+        profile.setTextures(textures);
 
-            skullOwnerCompound.setUUID("Id", UUID.randomUUID());
-          
-            skullOwnerCompound.getOrCreateCompound("Properties")
-                    .getCompoundList("textures")
-                    .addCompound()
-                    .setString("Value", textureStr);
-    });
-      
+
+        SkullMeta meta = (SkullMeta) head.getItemMeta();
+        Objects.requireNonNull(meta).setOwnerProfile(profile);
+        head.setItemMeta(meta);
+
+
         Optional.ofNullable(l.getWorld())
                 .ifPresent(world -> {
                     Zombie zombie = (Zombie) world.spawnEntity(l, EntityType.ZOMBIE);
