@@ -2,6 +2,8 @@ package nezd53.sneakfart;
 
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SingleLineChart;
+import org.bukkit.event.HandlerList;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Optional;
@@ -46,5 +48,10 @@ public final class SneakFart extends JavaPlugin {
         int pluginId = 12663; // <-- Replace with the id of your plugin!
         Metrics metrics = new Metrics(this, pluginId);
         metrics.addCustomChart(new SingleLineChart("fart_count", () -> fartCount));
+    }
+
+    @Override
+    public void onDisable() {
+        HandlerList.unregisterAll(this);
     }
 }
