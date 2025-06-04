@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.loot.LootTables;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.profile.PlayerProfile;
@@ -31,7 +30,7 @@ public class FartHandler {
         float yaw = player.getLocation().getYaw();
         Vector offset = new Vector(sin(toRadians(yaw)) * fartDistance, 0.25, -cos(toRadians(yaw)) * fartDistance);
         Location l = player.getLocation().add(offset);
-        player.getWorld().spawnParticle(Particle.REDSTONE, l,
+        player.getWorld().spawnParticle(Particle.DUST, l,
                 25, fartOffset, fartOffset, fartOffset, options);
         player.playSound(l, Sound.BLOCK_WET_GRASS_PLACE, (float) fartVolume, 0.005f);
 
@@ -88,7 +87,7 @@ public class FartHandler {
                     zombie.setInvisible(true);
                     zombie.setSilent(true);
                     zombie.setHealth(1);
-                    zombie.setLootTable(LootTables.EMPTY.getLootTable());
+                    zombie.setLootTable(null);
                     zombie.setInvisible(true);
                     zombie.setCustomName("Deadly Poop");
                 });
@@ -101,6 +100,6 @@ public class FartHandler {
                 .flatMap(List::stream)
                 .filter(p -> p.getLocation().distance(l) <= nauseaDistance)
                 .filter(Predicate.not(player::equals))
-                .forEach(p -> p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 5 * 20, 5)));
+                .forEach(p -> p.addPotionEffect(new PotionEffect(PotionEffectType.NAUSEA, 5 * 20, 5)));
     }
 }
