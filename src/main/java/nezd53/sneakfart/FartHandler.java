@@ -54,7 +54,9 @@ public class FartHandler {
         Location l = player.getLocation().add(offset);
         player.getWorld().spawnParticle(SpigotCompat.DUST_PARTICLE, l,
                 25, fartOffset, fartOffset, fartOffset, options);
-        playFartSound(player, l);
+
+        for (Player p : player.getWorld().getPlayers())
+            playFartSound(p, l);
 
         if (random() < poopChance)
             poop(player, offset, l);
