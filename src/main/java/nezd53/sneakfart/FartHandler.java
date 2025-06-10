@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.loot.LootTables;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.profile.PlayerProfile;
 import org.bukkit.profile.PlayerTextures;
@@ -121,7 +122,7 @@ public class FartHandler {
                     zombie.setInvisible(true);
                     zombie.setSilent(true);
                     zombie.setHealth(1);
-                    zombie.setLootTable(SpigotCompat.EMPTY_LOOT_TABLE);
+                    zombie.setLootTable(LootTables.SILVERFISH.getLootTable());
                     zombie.setInvisible(true);
                     zombie.setCustomName("Deadly Poop");
 
