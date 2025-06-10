@@ -20,7 +20,7 @@ public class ResourcePackListener implements Listener {
 
     @EventHandler
     public void onResourcePackStatus(PlayerResourcePackStatusEvent event) {
-        if(event.getStatus() == PlayerResourcePackStatusEvent.Status.SUCCESSFULLY_LOADED) {
+        if (event.getStatus() == PlayerResourcePackStatusEvent.Status.SUCCESSFULLY_LOADED) {
             addPlayer(event);
         } else {
             removePlayer(event);

@@ -51,7 +51,7 @@ public class FartHandler {
         float yaw = player.getLocation().getYaw();
         Vector offset = new Vector(sin(toRadians(yaw)) * fartDistance, 0.25, -cos(toRadians(yaw)) * fartDistance);
         Location l = player.getLocation().add(offset);
-      player.getWorld().spawnParticle(SpigotCompat.DUST_PARTICLE, l,
+        player.getWorld().spawnParticle(SpigotCompat.DUST_PARTICLE, l,
                 25, fartOffset, fartOffset, fartOffset, options);
         playFartSound(player, l);
 

@@ -62,7 +62,7 @@ public final class SneakFart extends JavaPlugin {
         nauseaDistance = config.getDouble("NauseaDistance", 3);
         // load from environment variable or config
         fartSoundNameCustom = Optional.ofNullable(System.getenv("FART_SOUND_NAME"))
-            .orElse(config.getString("FART_SOUND_NAME", null));
+                .orElse(config.getString("FART_SOUND_NAME", null));
     }
 
     @Override
