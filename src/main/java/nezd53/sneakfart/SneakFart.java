@@ -11,8 +11,8 @@ import java.util.Optional;
 public final class SneakFart extends JavaPlugin {
 
     static boolean sneakFarts, fartCommand;
-    static double fartDistance,
-            fartOffset, fartParticleSize, fartVolume, fartPitch, fartVolumeCustom, fartPitchCustom, poopChance, deadlyPoopChance, nauseaChance, nauseaDistance;
+    static double fartDistance, fartOffset, fartParticleSize, fartVolume, fartPitch, fartVolumeCustom,
+            fartPitchCustom, poopChance, deadlyPoopChance, nauseaChance, nauseaDistance, deadlyPoopSize;
     static int fartTimeStart, fartTimeEnd, fartParticleCount;
     static String fartSoundName, fartSoundNameCustom, poopName;
     static int fartCount;
@@ -60,6 +60,7 @@ public final class SneakFart extends JavaPlugin {
         poopName = config.getString("PoopName", "Poop");
         nauseaChance = config.getDouble("NauseaChance", 1);
         nauseaDistance = config.getDouble("NauseaDistance", 3);
+        deadlyPoopSize = config.getDouble("DeadlyPoopSize", 0.7);
         // load from environment variable or config
         fartSoundNameCustom = Optional.ofNullable(System.getenv("FART_SOUND_NAME"))
                 .orElse(config.getString("FART_SOUND_NAME", null));

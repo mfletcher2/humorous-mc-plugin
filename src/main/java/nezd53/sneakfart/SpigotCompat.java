@@ -1,6 +1,7 @@
 package nezd53.sneakfart;
 
 import org.bukkit.Particle;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.loot.LootTable;
 import org.bukkit.loot.LootTables;
 import org.bukkit.potion.PotionEffectType;
@@ -16,6 +17,7 @@ final class SpigotCompat {
     static final Particle DUST_PARTICLE = getDustParticle();
     static final LootTable EMPTY_LOOT_TABLE = getEmptyLootTable();
     public static final PotionEffectType NAUSEA_EFFECT = getNauseaEffect();
+    static final Attribute SCALE_ATTRIBUTE = getScaleAttribute();
 
     private SpigotCompat() {
     }
@@ -79,5 +81,27 @@ final class SpigotCompat {
     @SuppressWarnings("deprecation")
     private static @Nullable PotionEffectType getByName(String key) {
         return PotionEffectType.getByName(key);
+    }
+
+    /**
+     * Retrieves the correct scale type or null if it does not exist.
+     *
+     * <p> 1.20.5 introduced the attribute {@code GENERIC_SCALE}. This was renamed to {@code SCALE} in 1.21.2.
+     * Earlier versions do not have the scale attribute. </p>
+     *
+     * @return the {@link Attribute} for scale, or null if it does not exist
+     */
+    @Nullable
+    @SuppressWarnings("deprecation")
+    private static Attribute getScaleAttribute() {
+        try {
+            return Attribute.valueOf("SCALE");
+        } catch (IllegalArgumentException | IncompatibleClassChangeError e1) {
+            try {
+                return Attribute.valueOf("GENERIC_SCALE");
+            } catch (IllegalArgumentException | IncompatibleClassChangeError e2) {
+                return null;
+            }
+        }
     }
 }

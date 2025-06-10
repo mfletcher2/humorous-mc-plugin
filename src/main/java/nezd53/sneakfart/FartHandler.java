@@ -44,6 +44,7 @@ import static nezd53.sneakfart.SneakFart.nauseaChance;
 import static nezd53.sneakfart.SneakFart.nauseaDistance;
 import static nezd53.sneakfart.SneakFart.poopChance;
 import static nezd53.sneakfart.SneakFart.poopName;
+import static nezd53.sneakfart.SneakFart.deadlyPoopSize;
 
 public class FartHandler {
     static void fart(Player player) {
@@ -121,6 +122,10 @@ public class FartHandler {
                     zombie.setLootTable(SpigotCompat.EMPTY_LOOT_TABLE);
                     zombie.setInvisible(true);
                     zombie.setCustomName("Deadly Poop");
+
+                    if (SpigotCompat.SCALE_ATTRIBUTE != null && zombie.getAttribute(SpigotCompat.SCALE_ATTRIBUTE) != null) {
+                        Objects.requireNonNull(zombie.getAttribute(SpigotCompat.SCALE_ATTRIBUTE)).setBaseValue(deadlyPoopSize);
+                    }
                 });
     }
 
