@@ -11,9 +11,9 @@ import java.util.Optional;
 public final class SneakFart extends JavaPlugin {
 
     static boolean sneakFarts, fartCommand;
-    static double fartDistance, fartTimeStart, fartTimeEnd,
+    static double fartDistance,
             fartOffset, fartParticleSize, fartVolume, fartPitch, fartVolumeCustom, fartPitchCustom, poopChance, deadlyPoopChance, nauseaChance, nauseaDistance;
-    static int fartParticleCount;
+    static int fartTimeStart, fartTimeEnd, fartParticleCount;
     static String fartSoundName, fartSoundNameCustom, poopName;
     static int fartCount;
     static ResourcePackListener resourcePackListener = new ResourcePackListener();
@@ -45,8 +45,8 @@ public final class SneakFart extends JavaPlugin {
         sneakFarts = config.getBoolean("EnableFarts", true);
         fartCommand = config.getBoolean("FartCommand", true);
         fartDistance = config.getDouble("FartDistance", 0.8);
-        fartTimeStart = config.getDouble("FartTimeStart", 10);
-        fartTimeEnd = config.getDouble("FartTimeEnd", 60);
+        fartTimeStart = config.getInt("FartTimeStart", 10);
+        fartTimeEnd = config.getInt("FartTimeEnd", 60);
         fartOffset = config.getDouble("FartOffset", 0.25);
         fartParticleCount = config.getInt("FartParticleCount", 25);
         fartParticleSize = config.getDouble("FartParticleSize", 1);

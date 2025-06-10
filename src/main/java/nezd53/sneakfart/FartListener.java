@@ -23,7 +23,7 @@ public class FartListener implements Listener {
 
     private static void handleSneak(Player player) {
         int startingTick = player.getStatistic(Statistic.SNEAK_TIME);
-        int endTick = startingTick + (int) (random.nextInt() * (fartTimeEnd - fartTimeStart) + fartTimeStart) * 20;
+        int endTick = (int) (startingTick + random.nextFloat(fartTimeStart, fartTimeEnd  + 1) * 20);
 
         player.getServer().getScheduler().scheduleSyncDelayedTask(JavaPlugin.getProvidingPlugin(SneakFart.class), () -> {
             if (player.getStatistic(Statistic.SNEAK_TIME) >= endTick)
