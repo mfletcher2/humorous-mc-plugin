@@ -13,7 +13,7 @@
 [Usage Statistics](https://bstats.org/plugin/bukkit/SneakFart/12663)
 
 
-# 🚀 SneakFart Plugin for Minecraft
+# 💨 SneakFart Plugin for Minecraft
 
 ## 🧩 Plugin Installation
 
